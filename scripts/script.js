@@ -76,7 +76,7 @@ function readChatbox() {
   if (chat.indexOf("The catalyst of alteration contained") > -1) {
     let getItem = {
       item: chat.match(
-    /\d(\s+([a-zA-Z]+\s+)+)\([^)]*\)/g
+    /\d(\s+([a-zA-Z]+\s+)+)\([^)]*\)
   );
       time: new Date()
     };
