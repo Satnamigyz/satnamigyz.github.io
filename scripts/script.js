@@ -71,7 +71,7 @@ function readChatbox() {
     chat += opts[a].text + " ";
   }
 
-  if (chat.indexOf("Grand Exchange: ") > -1) {
+  if (chat.indexOf("Grand Exchange: ") > 0) {
     let getItem = {
       item: chat.match(/[a-zA-Z]+\s\d\d,\d\d\d*.x*.[a-zA-Z]+*.[a-zA-Z]+/),
       time: new Date()
