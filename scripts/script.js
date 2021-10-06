@@ -30,7 +30,7 @@ let saveData = JSON.parse(localStorage.serenData);
 //Find all visible chatboxes on screen
 $(".itemList").append("<li class='list-group-item'>Searching for chatboxes</li>");
 reader.find();
-reader.read();
+//reader.read();
 let findChat = setInterval(function () {
   if (reader.pos === null)
     reader.find();
