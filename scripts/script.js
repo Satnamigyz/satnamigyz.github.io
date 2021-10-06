@@ -87,11 +87,11 @@ function readChatbox() {
 function showItems() {
   $(".itemList").empty();
   if (localStorage.getItem("serenTotal") === "total") {
-    $(".itemList").append(`<li class="list-group-item header" data-show="history" title="Click to show History">Seren Item Totals</li>`);
+    $(".itemList").append(`<li class="list-group-item header" data-show="history" title="Click to show History">Clue Totals</li>`);
     let total = getTotal();
     Object.keys(total).sort().forEach(item => $(".itemList").append(`<li class="list-group-item">${item}: ${total[item]}</li>`))
   } else {
-    $(".itemList").append(`<li class="list-group-item header" data-show="total" title="Click to show Totals">Seren Item History</li>`);
+    $(".itemList").append(`<li class="list-group-item header" data-show="total" title="Click to show Totals">Clues from Bik History</li>`);
     saveData.slice().reverse().map(item => {
       $(".itemList").append(`<li class="list-group-item" title="${new Date(item.time).toLocaleString()}">${item.item}</li>`)
     })
