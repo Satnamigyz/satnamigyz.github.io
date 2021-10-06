@@ -7,8 +7,10 @@ const appColor = A1lib.mixColor(255, 255, 255);
 let reader = new Chatbox.default();
 reader.readargs = {
   colors: [
-    A1lib.mixColor(255, 255, 255), //Seren text color
-    A1lib.mixColor(127,169,255), //Test Chat text color
+    A1lib.mixColor(0, 252, 0), //Seren text color
+    A1lib.mixColor(30, 252, 0), //Seren text color
+	A1lib.mixColor(0, 255, 0), //Seren text color
+    // A1lib.mixColor(127,169,255), //Test Chat text color
   ],
   backwards: true,
 };
@@ -71,9 +73,8 @@ function readChatbox() {
     chat += opts[a].text + " ";
   }
 
-  if (chat.indexOf("Grand Exchange: ") > 0) {
-    let getItem = {
-      item: chat.match(/[a-zA-Z]+\s\d\d,\d\d\d*.x*.[a-zA-Z]+*.[a-zA-Z]+/),
+  var getItem = {
+      item: chat.match(/\d(\s+([a-zA-Z]+\s+)+)\([^)]*\)/i),
       time: new Date()
     };
     console.log(getItem);
