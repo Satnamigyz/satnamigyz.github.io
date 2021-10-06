@@ -24,7 +24,7 @@ let saveData = JSON.parse(localStorage.serenData);
 //Find all visible chatboxes on screen
 $(".itemList").append("<li class='list-group-item'>Searching for chatboxes</li>");
 reader.find();
-reader.read();
+//reader.read();
 let findChat = setInterval(function () {
   if (reader.pos === null)
     reader.find();
@@ -75,7 +75,9 @@ function readChatbox() {
 
   if (chat.indexOf("The catalyst of alteration contained") > -1) {
     let getItem = {
-      item: chat.match(/\d(\s+([a-zA-Z]+\s+)+)\([^)]*\)/),
+      item: chat.match(
+    /\d(\s+([a-zA-Z]+\s+)+)\([^)]*\)/g
+  );
       time: new Date()
     };
     console.log(getItem);
