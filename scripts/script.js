@@ -1,7 +1,7 @@
 //Enable "Add App" button for Alt1 Browser.
 A1lib.identifyApp("appconfig.json");
 
-const appColor = A1lib.mixColor(0, 255, 0);
+const appColor = A1lib.mixColor(255, 199, 0);
 
 // Set Chat reader
 let reader = new Chatbox.default();
@@ -75,9 +75,7 @@ function readChatbox() {
 
   if (chat.indexOf("The catalyst of alteration contained : ") > -1) {
     let getItem = {
-      item: chat.match(
-    /\d(\s+([a-zA-Z]+\s+)+)\([^)]*\)/i
-  );
+      item: chat
       time: new Date()
     };
     console.log(getItem);
