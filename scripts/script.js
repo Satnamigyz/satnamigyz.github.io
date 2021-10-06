@@ -7,15 +7,9 @@ const appColor = A1lib.mixColor(0, 255, 0);
 let reader = new Chatbox.default();
 reader.readargs = {
   colors: [
-    A1lib.mixColor(0, 255, 0), //Seren text color
     A1lib.mixColor(0, 252, 0), //Seren text color
     A1lib.mixColor(30, 252, 0), //Seren text color
-    A1lib.mixColor(28, 231, 4), //Seren text color
-	A1lib.mixColor(25, 200, 6), //Seren text color
-	A1lib.mixColor(25, 211, 4), //Seren text color
-	A1lib.mixColor(23, 164, 16), //Seren text color
-	A1lib.mixColor(25, 199, 5), //Seren text color
-	
+	A1lib.mixColor(0, 255, 0), //Seren text color
     // A1lib.mixColor(127,169,255), //Test Chat text color
   ],
   backwards: true,
@@ -30,7 +24,7 @@ let saveData = JSON.parse(localStorage.serenData);
 //Find all visible chatboxes on screen
 $(".itemList").append("<li class='list-group-item'>Searching for chatboxes</li>");
 reader.find();
-//reader.read();
+reader.read();
 let findChat = setInterval(function () {
   if (reader.pos === null)
     reader.find();
@@ -81,7 +75,7 @@ function readChatbox() {
 
   if (chat.indexOf("The catalyst of alteration contained") > -1) {
     let getItem = {
-      item: chat.match(/\d+ x [A-Za-z\s.'()1-4]+)/[0].trim()),
+      item: chat.match(\d+ x [A-Za-z\s.'()1-4]+),
       time: new Date()
     };
     console.log(getItem);
