@@ -9,7 +9,14 @@ reader.readargs = {
   colors: [
     A1lib.mixColor(0, 252, 0), //Seren text color
     A1lib.mixColor(30, 252, 0), //Seren text color
+	A1lib.mixColor(30, 255, 0), //Seren text color
+	A1lib.mixColor(28, 229, 0), //Seren text color
+	A1lib.mixColor(28, 229, 4), //Seren text color
 	A1lib.mixColor(0, 255, 0), //Seren text color
+	A1lib.mixColor(27, 230, 0), //Seren text color
+	A1lib.mixColor(30, 254, 0), //Seren text color
+	A1lib.mixColor(29, 241, 0), //Seren text color
+	A1lib.mixColor(29, 241, 4), //Seren text color
     // A1lib.mixColor(127,169,255), //Test Chat text color
   ],
   backwards: true,
