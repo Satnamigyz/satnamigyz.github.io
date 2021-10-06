@@ -8,7 +8,7 @@ let reader = new Chatbox.default();
 reader.readargs = {
   colors: [
     A1lib.mixColor(255, 255, 255), //Seren text color
-    // A1lib.mixColor(127,169,255), //Test Chat text color
+    A1lib.mixColor(127,169,255), //Test Chat text color
   ],
   backwards: true,
 };
