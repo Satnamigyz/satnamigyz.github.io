@@ -1,7 +1,7 @@
 //Enable "Add App" button for Alt1 Browser.
 A1lib.identifyApp("appconfig.json");
 
-const appColor = A1lib.mixColor(255, 199, 0);
+const appColor = A1lib.mixColor(255, 255, 255);
 
 // Set Chat reader
 let reader = new Chatbox.default();
