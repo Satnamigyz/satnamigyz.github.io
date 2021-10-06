@@ -75,7 +75,7 @@ function readChatbox() {
 
   if (chat.indexOf("The catalyst of alteration contained") > -1) {
     let getItem = {
-      item: chat
+      item: chat,
       time: new Date()
     };
     console.log(getItem);
