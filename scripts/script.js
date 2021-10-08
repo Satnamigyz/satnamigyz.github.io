@@ -7,26 +7,16 @@ const appColor = A1lib.mixColor(255, 255, 255);
 let reader = new Chatbox.default();
 reader.readargs = {
   colors: [
-    A1lib.mixColor(0, 252, 0), //Seren text color
-    A1lib.mixColor(30, 252, 0), //Seren text color
-	A1lib.mixColor(30, 255, 0), //Seren text color
-	A1lib.mixColor(28, 229, 0), //Seren text color
-	A1lib.mixColor(28, 229, 4), //Seren text color
-	A1lib.mixColor(0, 255, 0), //Seren text color
-	A1lib.mixColor(27, 230, 0), //Seren text color
-	A1lib.mixColor(30, 254, 0), //Seren text color
-	A1lib.mixColor(29, 241, 0), //Seren text color
-	A1lib.mixColor(29, 241, 4), //Seren text color
-    // A1lib.mixColor(127,169,255), //Test Chat text color
+    A1lib.mixColor(27, 254, 0), //Catalyst text color
   ],
   backwards: true,
 };
 
 //Setup localStorage variable.
-if (!localStorage.serenData) {
-  localStorage.setItem("serenData", JSON.stringify([]))
+if (!localStorage.cataData) {
+  localStorage.setItem("cataData", JSON.stringify([]))
 }
-let saveData = JSON.parse(localStorage.serenData);
+let saveData = JSON.parse(localStorage.cataData);
 
 //Find all visible chatboxes on screen
 $(".itemList").append("<li class='list-group-item'>Searching for chatboxes</li>");
@@ -41,8 +31,8 @@ let findChat = setInterval(function () {
       $(".chat").append(`<option value=${i}>Chat ${i}</option>`);
     });
 
-    if (localStorage.serenChat) {
-      reader.pos.mainbox = reader.pos.boxes[localStorage.serenChat];
+    if (localStorage.cataChat) {
+      reader.pos.mainbox = reader.pos.boxes[localStorage.cataChat];
     } else {
       //If multiple boxes are found, this will select the first, which should be the top-most chat box on the screen.
       reader.pos.mainbox = reader.pos.boxes[0];
@@ -75,18 +65,21 @@ function showSelectedChat(chat) {
 function readChatbox() {
   var opts = reader.read() || [];
   var chat = "";
-
+  
+  
   for (a in opts) {
     chat += opts[a].text + " ";
   }
 
-  var getItem = {
-      item: chat.match(/\d(\s+([a-zA-Z]+\s+)+)\([^)]*\)/i),
+  if (chat.indexOf("The catalyst of alteration contained :") > -1) {
+    let getItem = {
+      item: chat.match(/\d+ x [A-Za-z\s-'()1-4]+/)[0].trim(),
       time: new Date()
     };
+	
     console.log(getItem);
     saveData.push(getItem);
-    localStorage.setItem("serenData", JSON.stringify(saveData));
+    localStorage.setItem("cataData", JSON.stringify(saveData));
     checkAnnounce(getItem);
     showItems();
   }
@@ -94,28 +87,28 @@ function readChatbox() {
 
 function showItems() {
   $(".itemList").empty();
-  if (localStorage.getItem("serenTotal") === "total") {
-    $(".itemList").append(`<li class="list-group-item header" data-show="history" title="Click to show History">Clue Totals</li>`);
+  if (localStorage.getItem("cataTotal") === "total") {
+    $(".itemList").append(`<li class="list-group-item header" data-show="history" title="Click to show History">Total Clues Collected</li>`);
     let total = getTotal();
     Object.keys(total).sort().forEach(item => $(".itemList").append(`<li class="list-group-item">${item}: ${total[item]}</li>`))
   } else {
-    $(".itemList").append(`<li class="list-group-item header" data-show="total" title="Click to show Totals">Clues from Bik History</li>`);
+    $(".itemList").append(`<li class="list-group-item header" data-show="total" title="Click to show Totals">Bik Clue History</li>`);
     saveData.slice().reverse().map(item => {
       $(".itemList").append(`<li class="list-group-item" title="${new Date(item.time).toLocaleString()}">${item.item}</li>`)
     })
   }
-}
+ }
 
 function checkAnnounce(getItem) {
-  if (localStorage.serenAnnounce) {
-    fetch(localStorage.getItem("serenAnnounce"),
+  if (localStorage.cataAnnounce) {
+    fetch(localStorage.getItem("cataAnnounce"),
       {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: "Scripture of Bik clues tracker",
+          username: "Ibby's cata Tracker",
           content: `${new Date(getItem.time).toLocaleString()}: Received - ${getItem.item}`
         })
       })
@@ -137,18 +130,18 @@ $(function () {
   $(".chat").change(function () {
     reader.pos.mainbox = reader.pos.boxes[$(this).val()];
     showSelectedChat(reader.pos);
-    localStorage.setItem("serenChat", $(this).val());
+    localStorage.setItem("cataChat", $(this).val());
     $(this).val("");
   });
 
   $(".export").click(function () {
     var str, fileName;
     //If totals is checked, export totals
-    if (localStorage.getItem("serenTotal") === "total") {
+    if (localStorage.getItem("cataTotal") === "total") {
       str = "Qty,Item\n";
       let total = getTotal();
       Object.keys(total).sort().forEach(item => str = `${str}${total[item]},${item}\n`);
-      fileName = "serenTotalExport.csv";
+      fileName = "cataTotalExport.csv";
 
       //Otherwise, export list by item and time received.
     } else {
@@ -156,7 +149,7 @@ $(function () {
       saveData.forEach((item) => {
         str = `${str}${item.item},${new Date(item.time).toLocaleString()}\n`;
       });
-      fileName = "serenHistoryExport.csv"
+      fileName = "cataHistoryExport.csv"
     }
     var blob = new Blob([str], { type: "text/csv;charset=utf-8;" });
     if (navigator.msSaveBlob) {
@@ -179,13 +172,13 @@ $(function () {
   });
 
   $(".clear").click(function () {
-    localStorage.removeItem("serenData");
-    localStorage.removeItem("serenChat");
-    localStorage.removeItem("serenTotal");
+    localStorage.removeItem("cataData");
+    localStorage.removeItem("cataChat");
+    localStorage.removeItem("cataTotal");
     location.reload();
   })
 
   $(document).on("click", ".header", function () {
-    localStorage.setItem("serenTotal", $(this).data("show")); showItems()
+    localStorage.setItem("cataTotal", $(this).data("show")); showItems()
   })
 });
