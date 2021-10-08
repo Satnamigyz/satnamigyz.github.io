@@ -1,5 +1,5 @@
 {
-  "appName": "Scripture of Bik clues tracker",
+  "appName": "Bik clues tracker",
   "description": "Tracks Scripture of Bik clues as they appear in the chat box.",
   "appUrl": "./index.html",
   "configUrl": "./appconfig.json",
